@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(117, 117, 178);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px;
+        height: 100vh;
+    }
+    .BoxHolder{
+        min-height: calc(100vh - 50px);
+        width: 850px;
+        background-color: rgb(80, 80, 130);
+        text-align: center;
+        padding-top: 20px;
+    }
+    .BoxHolder select{
+        width: 80%;
+        height: 50px;
+    }
+    #Area{
+        display: flex;
+       flex-direction: column;
+       align-items: center;
+    }
+    #Area h1{
+    display: flex;
+    margin: 2px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(35, 35, 75);
+    padding: 20px;
+    width: calc(80% - 40px);
+    }
+</style>
+<body>
+     <div class="BoxHolder">
+        <select id="options" onchange="UpdateOptions(this)" onload="UpdateOptions(this)">
+            <option value="All">All</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Senior">Senior</option>
+            <option value="Junior">Junior</option>
+            <option value="Sophomore">Sophomore</option>
+            <option value="Freshman">Freshman</option>
+          </select>
+          <div id="Area">
+
+          </div>
+     </div>
+</body>
+<script>
+    var Students =
+    [
+        {Name:'Kris',Grade:'Junior',Gender:'Male'},
+        {Name:'Jayden',Grade:'Sophomore',Gender:'Female'},
+        {Name:'Clayton',Grade:'Freshman',Gender:'Male'},
+        {Name:'Jack',Grade:'Junior',Gender:'Male'},
+        {Name:'Barns',Grade:'Senior',Gender:'Female'},
+        {Name:'Hunter',Grade:'Freshman',Gender:'Male'},
+        {Name:'Joe',Grade:'Senior',Gender:'Male'},
+        {Name:'RoadHog',Grade:'Freshman',Gender:'Male'}
+    ];
+    UpdateOptions(document.getElementById('options'));
+   function UpdateOptions(e){
+    var Display = Students;
+    if(e.value != 'All'){
+    Display = Display.filter((element,i)=>{
+        if(e.value === element.Gender || e.value === element.Grade){
+             return element
+        }
+    })
+    }
+   var A = document.getElementById('Area');
+        A.innerHTML = '';
+    Display.forEach(elm=>{
+        var h1 = document.createElement('h1');
+        h1.innerHTML = `${elm.Name} | ${elm.Grade} | ${elm.Gender} `
+      A.appendChild(h1)
+    })
+   }
+
+
+</script>
+</html>
